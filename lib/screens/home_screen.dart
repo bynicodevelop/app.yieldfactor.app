@@ -1,6 +1,7 @@
 import 'package:dividends_tracker_app/components/authentication/authentication_component.dart';
 import 'package:dividends_tracker_app/components/avatar/avatar_component.dart';
 import 'package:dividends_tracker_app/components/buttons/subscription_link/button_subscription_link_component.dart';
+import 'package:dividends_tracker_app/components/favorties/favorites_components.dart';
 import 'package:dividends_tracker_app/components/stocks/list/stocks_list_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController(
+    initialPage: 0,
+  );
+
   User? _user;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,35 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          body: const StocksListComponent(),
+          body: PageView(
+            controller: _pageController,
+            children: const [
+              StocksListComponent(),
+              FavoritesComponent(),
+            ],
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_rounded),
+                label: "Stocks",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.star_rounded),
+                label: "Favorites",
+              ),
+            ],
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() => _currentIndex = index);
+
+              _pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+              );
+            },
+          ),
         ),
         AuthenticationComponent(
           onAuthenticated: (user) => setState(

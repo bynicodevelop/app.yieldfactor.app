@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dividends_tracker_app/components/buttons/favoris/button_favoris_component.dart';
 import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
 import 'package:flutter/material.dart';
 
 class StocksItemComponent extends StatelessWidget {
+  final bool isFavorite;
   final DocumentSnapshot stock;
   final GuardInitialState state;
 
   const StocksItemComponent({
     Key? key,
+    required this.isFavorite,
     required this.stock,
     required this.state,
   }) : super(key: key);
@@ -59,14 +62,29 @@ class StocksItemComponent extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: 8.0,
-                                ),
-                                child: Text(
-                                  stockData["name"],
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ButtonFavorisComponent(
+                                    item: stockData,
+                                    isFavorite: isFavorite,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 1.0,
+                                      ),
+                                      child: Text(
+                                        stockData["name"],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3,
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
