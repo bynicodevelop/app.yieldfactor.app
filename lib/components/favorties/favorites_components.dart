@@ -46,6 +46,7 @@ class FavoritesComponent extends StatelessWidget {
             ),
             itemBuilder: (BuildContext context, int index) {
               return BlocBuilder<UserBloc, UserState>(
+                bloc: context.read<UserBloc>()..add(OnLoadUserEvent()),
                 builder: (context, userState) {
                   return StocksItemComponent(
                     stock: favorites[index],
