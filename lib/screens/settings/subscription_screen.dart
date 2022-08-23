@@ -22,8 +22,8 @@ class SubscriptionScreen extends StatelessWidget {
       ),
       body: BlocBuilder<GuardBloc, GuardState>(
         builder: (context, state) {
-          final bool isSubscribed = (state as GuardInitialState).isSubscribed;
-          final DateTime? subscriptionEndDate = state.subscriptionEndDate;
+          final DateTime? subscriptionEndDate =
+              (state as GuardInitialState).subscriptionEndDate;
           final bool hasUnsubscribed = state.hasUnsubscribed;
 
           return Center(
