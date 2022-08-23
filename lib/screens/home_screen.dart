@@ -23,6 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
+            title: Row(
+              children: [
+                Image.asset(
+                  "assets/main-logo.png",
+                  height: 25,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  'Yield Factor ™',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(
