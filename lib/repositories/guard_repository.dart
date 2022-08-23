@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 class GuardRepository {
   final int defaultDaysLeft = 8;
 
-  // DateTime _now() => DateTime.now();
-  DateTime _now() => DateTime.now().add(const Duration(days: 9));
+  DateTime _now() => DateTime.now();
+  // DateTime _now() => DateTime.now().add(const Duration(days: 9));
 
   Future<int> daysLeft() async {
     User? user = await FirebaseAuth.instance.authStateChanges().first;
