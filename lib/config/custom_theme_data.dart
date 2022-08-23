@@ -64,6 +64,12 @@ class CustomThemeData {
         color: Colors.white,
         surfaceTintColor: kPrimaryColor,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        selectedItemColor: kPrimaryColor,
+        unselectedItemColor: Colors.grey[500],
+      ),
     );
   }
 }

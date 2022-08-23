@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:dividends_tracker_app/components/buttons/favoris/bloc/add_favoris_bloc.dart';
 import 'package:dividends_tracker_app/components/buttons/standard/bloc/standard_button_bloc.dart';
+import 'package:dividends_tracker_app/components/favorties/bloc/favorites_bloc.dart';
 import 'package:dividends_tracker_app/components/modals/bottom_sheet/checkout/bloc/checkout_bloc.dart';
 import 'package:dividends_tracker_app/components/stocks/bloc/stocks_bloc.dart';
 import 'package:dividends_tracker_app/config/custom_theme_data.dart';
@@ -9,6 +11,7 @@ import 'package:dividends_tracker_app/screens/home_screen.dart';
 import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
 import 'package:dividends_tracker_app/services/subscription/subscription_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dividends_tracker_app/services/user/user_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -73,8 +76,17 @@ class App extends StatelessWidget {
           lazy: true,
           create: (BuildContext context) => GuardBloc(),
         ),
+        BlocProvider<UserBloc>(
+          create: (BuildContext context) => UserBloc(),
+        ),
+        BlocProvider<FavoritesBloc>(
+          create: (BuildContext context) => FavoritesBloc(),
+        ),
         BlocProvider<CheckoutBloc>(
           create: (BuildContext context) => CheckoutBloc(),
+        ),
+        BlocProvider<AddFavorisBloc>(
+          create: (BuildContext context) => AddFavorisBloc(),
         ),
         BlocProvider<SubscriptionBloc>(
           create: (BuildContext context) => SubscriptionBloc(),
@@ -83,7 +95,14 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: CustomThemeData.themeLight(context),
-        home: const HomeScreen(),
+        home: Builder(builder: (BuildContext context) {
+          return BlocBuilder<UserBloc, UserState>(
+            bloc: context.read<UserBloc>()..add(OnLoadUserEvent()),
+            builder: (context, state) {
+              return const HomeScreen();
+            },
+          );
+        }),
       ),
     );
   }

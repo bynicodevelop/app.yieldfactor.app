@@ -3,6 +3,7 @@ import 'package:dividends_tracker_app/components/stocks/bloc/stocks_bloc.dart';
 import 'package:dividends_tracker_app/components/stocks/item/stocks_item_component.dart';
 import 'package:dividends_tracker_app/config/constants.dart';
 import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
+import 'package:dividends_tracker_app/services/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -88,9 +89,21 @@ class _StocksListComponentState extends State<StocksListComponent> {
                 16.0,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return StocksItemComponent(
-                  stock: stocks[index],
-                  state: state as GuardInitialState,
+                return BlocBuilder<UserBloc, UserState>(
+                  builder: (context, userState) {
+                    // print((userState as UserInitialState).favorites);
+                    // print(stocks[index].id);
+
+                    return StocksItemComponent(
+                        stock: stocks[index],
+                        state: state as GuardInitialState,
+                        isFavorite: (userState as UserInitialState)
+                            .favorites
+                            .map(
+                              (f) => f.id.toLowerCase(),
+                            )
+                            .contains(stocks[index].id));
+                  },
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
