@@ -70,6 +70,10 @@ class CustomThemeData {
         selectedItemColor: kPrimaryColor,
         unselectedItemColor: Colors.grey[500],
       ),
+      inputDecorationTheme: const InputDecorationTheme(
+        prefixIconColor: kPrimaryColor,
+        suffixIconColor: kPrimaryColor,
+      ),
     );
   }
 }

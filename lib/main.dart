@@ -9,6 +9,7 @@ import 'package:dividends_tracker_app/components/stocks/bloc/stocks_bloc.dart';
 import 'package:dividends_tracker_app/config/custom_theme_data.dart';
 import 'package:dividends_tracker_app/screens/home_screen.dart';
 import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
+import 'package:dividends_tracker_app/services/search/search_bloc.dart';
 import 'package:dividends_tracker_app/services/subscription/subscription_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dividends_tracker_app/services/user/user_bloc.dart';
@@ -90,6 +91,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<SubscriptionBloc>(
           create: (BuildContext context) => SubscriptionBloc(),
+        ),
+        BlocProvider<SearchBloc>(
+          create: (BuildContext context) => SearchBloc(),
         ),
       ],
       child: MaterialApp(
