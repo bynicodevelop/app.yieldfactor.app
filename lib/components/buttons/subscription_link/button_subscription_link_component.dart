@@ -40,6 +40,9 @@ class _ButtonSubscriptionLinkComponentState
         return Visibility(
           visible: !isSubscribed,
           child: TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+            ),
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
@@ -54,7 +57,7 @@ class _ButtonSubscriptionLinkComponentState
                       : "$daysLeft days free trial",
               style: TextStyle(
                 color: Colors.grey[800],
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),

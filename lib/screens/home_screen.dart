@@ -30,29 +30,36 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Row(
-              children: [
-                SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: Image.asset(
-                    "assets/icon-40x40.png",
+            title: Padding(
+              padding: const EdgeInsets.only(
+                top: 4.0,
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 25,
                     height: 25,
+                    child: Image.asset(
+                      "assets/icon-40x40.png",
+                      height: 25,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  'Yield Factor ™',
-                  style: TextStyle(
-                    fontSize: 16,
+                  const SizedBox(
+                    width: 4.0,
                   ),
-                ),
-              ],
+                  const Text(
+                    'Yield Factor ™',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: 8.0,
+                  top: 4.0,
                   right: _user == null ? 12.0 : 0.0,
                 ),
                 child: Row(

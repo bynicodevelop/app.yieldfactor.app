@@ -7,6 +7,7 @@ class ButtonSearchComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      padding: EdgeInsets.zero,
       onPressed: () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -14,7 +15,9 @@ class ButtonSearchComponent extends StatelessWidget {
           fullscreenDialog: true,
         ),
       ),
-      icon: const Icon(Icons.search_rounded),
+      icon: const Icon(
+        Icons.search_rounded,
+      ),
     );
   }
 }

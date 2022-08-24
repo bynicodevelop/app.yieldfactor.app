@@ -42,6 +42,7 @@ class _AvatarComponentState extends State<AvatarComponent> {
       ),
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
+        padding: EdgeInsets.zero,
       ),
       child: _user == null
           ? const Icon(Icons.person)
