@@ -1,5 +1,6 @@
 import 'package:dividends_tracker_app/components/authentication/authentication_component.dart';
 import 'package:dividends_tracker_app/components/avatar/avatar_component.dart';
+import 'package:dividends_tracker_app/components/buttons/search/button_search_component.dart';
 import 'package:dividends_tracker_app/components/buttons/subscription_link/button_subscription_link_component.dart';
 import 'package:dividends_tracker_app/components/favorties/favorites_components.dart';
 import 'package:dividends_tracker_app/components/stocks/list/stocks_list_component.dart';
@@ -31,9 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: Colors.transparent,
             title: Row(
               children: [
-                Image.asset(
-                  "assets/main-logo.png",
+                SizedBox(
+                  width: 25,
                   height: 25,
+                  child: Image.asset(
+                    "assets/icon-40x40.png",
+                    height: 25,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 const Text(
@@ -55,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const ButtonSubscriptionLinkComponent(),
+                    const ButtonSearchComponent(),
                     if (FirebaseAuth.instance.currentUser != null)
                       const AvatarComponent(
                         radius: 19,

@@ -59,4 +59,43 @@ class StocksRepository {
 
     _controller.add(_stocks);
   }
+
+  Future<List<DocumentSnapshot<Map<String, dynamic>>>> getStocksByQuery(
+      String query) async {
+    final List<DocumentSnapshot<Map<String, dynamic>>> stocks = [];
+
+    final QuerySnapshot<Map<String, dynamic>> stocksByNameQuerySnapshot =
+        await FirebaseFirestore.instance
+            .collection("stocks")
+            .where(
+              "name",
+              isGreaterThanOrEqualTo: query,
+            )
+            .limit(10)
+            .get();
+
+    final QuerySnapshot<Map<String, dynamic>> stocksByTickerQuerySnapshot =
+        await FirebaseFirestore.instance
+            .collection("stocks")
+            .where(
+              "ticker",
+              isEqualTo: query.toUpperCase(),
+            )
+            .limit(10)
+            .get();
+
+    for (var doc in stocksByNameQuerySnapshot.docs) {
+      if (!stocks.contains(doc)) {
+        stocks.add(doc);
+      }
+    }
+
+    for (var doc in stocksByTickerQuerySnapshot.docs) {
+      if (!stocks.contains(doc)) {
+        stocks.add(doc);
+      }
+    }
+
+    return stocks;
+  }
 }
