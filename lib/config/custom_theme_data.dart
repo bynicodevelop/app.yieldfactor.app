@@ -44,6 +44,18 @@ class CustomThemeData {
             height: 1.3,
             letterSpacing: .9,
           ),
+          headline5: base.textTheme.headline5!.copyWith(
+            fontSize: 22.0,
+            fontWeight: FontWeight.w700,
+            color: Colors.grey[800],
+          ),
+          headline6: base.textTheme.headline6!.copyWith(
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.grey[600],
+            height: 1.3,
+            letterSpacing: .9,
+          ),
           button: base.textTheme.button!.copyWith(
             color: Colors.grey[800],
             fontSize: 16.0,
