@@ -14,3 +14,5 @@ class LoadingSubscriptionState extends SubscriptionState {}
 class ActiveSubscriptionState extends SubscriptionState {}
 
 class InactiveSubscriptionState extends SubscriptionState {}
+
+class ErrorSubscriptionState extends SubscriptionState {}

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dividends_tracker_app/firebase_options.dart';
 import 'package:dividends_tracker_app/screens/terms_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,8 +43,8 @@ class _AuthenticationComponentState extends State<AuthenticationComponent> {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn(
+      clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
       scopes: [
         'email',
       ],

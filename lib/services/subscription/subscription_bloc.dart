@@ -17,7 +17,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
         emit(InactiveSubscriptionState());
       } catch (e) {
-        // TODO: Handle error
+        emit(ErrorSubscriptionState());
       }
     });
 
@@ -32,7 +32,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
         emit(ActiveSubscriptionState());
       } catch (e) {
-        // TODO: Handle error
+        emit(ErrorSubscriptionState());
       }
     });
 

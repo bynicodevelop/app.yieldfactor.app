@@ -44,15 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 25,
                     ),
                   ),
-                  const SizedBox(
-                    width: 4.0,
-                  ),
-                  const Text(
-                    'Yield Factor ™',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
                 ],
               ),
             ),
