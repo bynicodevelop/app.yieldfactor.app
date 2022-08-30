@@ -47,9 +47,9 @@ Future<void> main() async {
       host,
       5001,
     );
+  } else {
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   }
-
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   // await FirebaseAuth.instance.signOut();
 
