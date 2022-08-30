@@ -9,6 +9,7 @@ import 'package:dividends_tracker_app/components/stocks/bloc/stocks_bloc.dart';
 import 'package:dividends_tracker_app/config/custom_theme_data.dart';
 import 'package:dividends_tracker_app/screens/home_screen.dart';
 import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
+import 'package:dividends_tracker_app/services/notifications/notifications_bloc.dart';
 import 'package:dividends_tracker_app/services/search/search_bloc.dart';
 import 'package:dividends_tracker_app/services/subscription/subscription_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +17,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dividends_tracker_app/services/user/user_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -55,6 +57,24 @@ Future<void> main() async {
 
   await FirebaseFirestore.instance.terminate();
   await FirebaseFirestore.instance.clearPersistence();
+
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  final NotificationsBloc notification = NotificationsBloc();
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    notification.initialize();
+  }
 
   runApp(const App());
 }
