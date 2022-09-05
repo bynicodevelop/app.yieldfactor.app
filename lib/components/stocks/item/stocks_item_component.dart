@@ -68,6 +68,7 @@ class StocksItemComponent extends StatelessWidget {
                               left: 16.0,
                               top: 16.0,
                               bottom: 16.0,
+                              right: 4.0,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,12 +100,29 @@ class StocksItemComponent extends StatelessWidget {
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      stockData["ticker"],
-                                      style:
-                                          Theme.of(context).textTheme.headline4,
+                                    if (stockData["lastClosePrice"] != null)
+                                      Text("\$${stockData["lastClosePrice"]}"),
+                                    if (stockData["lastClosePrice"] != null)
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 4.0,
+                                        ),
+                                        child: Text("•"),
+                                      ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: stockData["lastClosePrice"] != null
+                                            ? 1.0
+                                            : 0.0,
+                                      ),
+                                      child: Text(
+                                        stockData["ticker"],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
+                                      ),
                                     ),
                                   ],
                                 )

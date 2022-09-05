@@ -15,6 +15,10 @@ class StockDetailScreen extends StatelessWidget {
     required this.stock,
   }) : super(key: key);
 
+  DateTime _getDate(int date) {
+    return DateTime.fromMillisecondsSinceEpoch(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> stockData = stock.data() as Map<String, dynamic>;
@@ -26,12 +30,13 @@ class StockDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              stockData["name"].toString().length > 20
-                  ? "${stockData["name"].toString().substring(0, 20)}..."
+              stockData["name"].toString().length > 19
+                  ? "${stockData["name"].toString().substring(0, 19)}..."
                   : stockData["name"].toString(),
               style: const TextStyle(
                 fontSize: 18,
@@ -77,12 +82,43 @@ class StockDetailScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16.0,
-          vertical: 28.0,
+        padding: const EdgeInsets.only(
+          left: 16.0,
+          right: 16.0,
+          bottom: 32.0,
         ),
         shrinkWrap: true,
         children: [
+          if (stockData["lastClosePrice"] != null)
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisSpacing: 5,
+              crossAxisCount: 1,
+              childAspectRatio: 16 / 5,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "\$${stockData["lastClosePrice"]}",
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize: 52.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    Text(
+                      "Last Close ${_getDate(stockData['lastClosePriceDate']).day}-${_getDate(stockData['lastClosePriceDate']).month}-${_getDate(stockData['lastClosePriceDate']).year}"
+                          .toUpperCase(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          const SizedBox(
+            height: 28.0,
+          ),
           Column(
             children: [
               GridView.count(

@@ -29,11 +29,18 @@ class NotificationRepository {
       final String? token = await messaging.getToken();
 
       if (token != null) {
-        print(token);
+        final DocumentSnapshot userDocumentSnapshot =
+            await firestore.collection('users').doc(user.uid).get();
 
-        await firestore.collection('users').doc(user.uid).set({
-          "notificationToken": token,
-        });
+        if (userDocumentSnapshot.exists) {
+          await firestore.collection('users').doc(user.uid).update({
+            "notificationToken": token,
+          });
+        } else {
+          await firestore.collection('users').doc(user.uid).set({
+            "notificationToken": token,
+          });
+        }
       }
     } catch (e) {
       log('AuthenticationRepository.updateNotificationToken: ${e.toString()}');

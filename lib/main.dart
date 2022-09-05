@@ -12,6 +12,7 @@ import 'package:dividends_tracker_app/services/guard/guard_bloc.dart';
 import 'package:dividends_tracker_app/services/notifications/notifications_bloc.dart';
 import 'package:dividends_tracker_app/services/search/search_bloc.dart';
 import 'package:dividends_tracker_app/services/subscription/subscription_bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: unused_import
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -23,7 +24,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
